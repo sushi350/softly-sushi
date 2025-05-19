@@ -265,7 +265,13 @@
     deleteBtn.style.border = 'none';
     deleteBtn.style.borderRadius = '5px';
     deleteBtn.style.cursor = 'pointer';
-    deleteBtn.onclick = () => div.remove();
+    deleteBtn.onclick = () => {
+      const video = div.querySelector('video');
+      if (video && video.src.startsWith('blob:')) {
+        URL.revokeObjectURL(video.src);
+      }
+      div.remove();
+    };
     div.appendChild(deleteBtn);
 
     fileInput.value = "";
@@ -274,6 +280,7 @@
   }
 </script>
 </html>
+
 
 
 
