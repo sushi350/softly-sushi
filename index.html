@@ -219,6 +219,8 @@
     if (!fileInput.files[0]) return alert("Please upload a video.");
 
     const videoURL = URL.createObjectURL(fileInput.files[0]);
+
+    // Preview the video
     const preview = document.createElement('video');
     preview.src = videoURL;
     preview.controls = true;
@@ -236,18 +238,7 @@
       alert("You've reached your 30-day journal limit 🌿✨");
       return;
     }
-    if (entryCount >= 30) {
-      alert("You've reached your 30-day journal limit 🌿✨");
-      return;
-    }
 
-    const fileInput = document.getElementById('videoFile');
-    const notes = document.getElementById('videoNotes').value;
-    const slider = document.getElementById('postSlider').value;
-
-    if (!fileInput.files[0]) return alert("Please upload a video.");
-
-    const videoURL = URL.createObjectURL(fileInput.files[0]);
     const container = document.getElementById('entriesContainer');
 
     const div = document.createElement('div');
@@ -276,12 +267,15 @@
     deleteBtn.style.cursor = 'pointer';
     deleteBtn.onclick = () => div.remove();
     div.appendChild(deleteBtn);
+
     fileInput.value = "";
     document.getElementById('videoNotes').value = "";
     document.getElementById('postSlider').value = 0;
   }
+  }
 </script>
 </html>
+
 
 
 
