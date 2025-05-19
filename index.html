@@ -4,6 +4,10 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Softly Sushi</title>
+  <link rel="icon" href="https://i.imgur.com/3JQwZ4D.png" />
+  <link rel="apple-touch-icon" href="https://i.imgur.com/3JQwZ4D.png" />
+  <meta name="apple-mobile-web-app-title" content="Softly Sushi">
+  <meta name="theme-color" content="#f1f6f2">
   <style>
     body {
       margin: 0;
@@ -159,87 +163,87 @@
 </head>
 <body>
   <div class="password-screen" id="passwordScreen">
-    <h2>Softly Sushi Access Only</h2>
-    <p>If you're not Sushi, kindly disappear 😌</p>
-    <input type="password" id="passwordInput" placeholder="Enter password...">
-    <button onclick="checkPassword()">Enter</button>
-  </div>
+  <h2>Softly Sushi Access Only</h2>
+  <p>If you're not Sushi, kindly disappear 😌</p>
+  <input type="password" id="passwordInput" placeholder="Enter password...">
+  <button onclick="checkPassword()">Enter</button>
+</div>
 
-  <header>Softly Sushi - Private Journal</header>
+<header>Softly Sushi - Private Journal</header>
 
-  <div class="intro">
-    Grab your favorite cozy drink, tuck into a blanket, and let your thoughts flow.<br>
-    This space is for soft chaos, rainy day dreams, and glowing self-truths ☕🍃
-  </div>
+<div class="intro">
+  Grab your favorite cozy drink, tuck into a blanket, and let your thoughts flow.<br>
+  This space is for soft chaos, rainy day dreams, and glowing self-truths ☕🍃
+</div>
 
-  <div class="upload-section" id="uploadSection">
-    <h3>Upload Today's Entry</h3>
-    <input type="file" id="videoFile" accept="video/mp4">
-    <textarea id="videoNotes" placeholder="How you felt, what you wore, anything you learned..."></textarea>
-    <label for="postSlider">Would I Post This?</label>
-    <input type="range" id="postSlider" min="0" max="100" step="25">
-    <button onclick="addEntry()">Upload</button>
-  </div>
+<div class="upload-section" id="uploadSection">
+  <h3>Upload Today's Entry</h3>
+  <input type="file" id="videoFile" accept="video/mp4">
+  <textarea id="videoNotes" placeholder="How you felt, what you wore, anything you learned..."></textarea>
+  <label for="postSlider">Would I Post This?</label>
+  <input type="range" id="postSlider" min="0" max="100" step="25">
+  <button onclick="addEntry()">Upload</button>
+</div>
 
-  <div class="container" id="entriesContainer"></div>
+<div class="container" id="entriesContainer"></div>
 
-  <script>
-    function checkPassword() {
-      const input = document.getElementById('passwordInput').value;
-      if (input === "Sushi'space") {
-        document.getElementById('passwordScreen').style.display = 'none';
-        document.querySelector('header').style.display = 'block';
-        document.querySelector('.container').style.display = 'block';
-        document.querySelector('.intro').style.display = 'block';
-        document.querySelector('.upload-section').style.display = 'block';
-      } else {
-        alert("Incorrect password. Try again, Sushi.");
-      }
+<script>
+  function checkPassword() {
+    const input = document.getElementById('passwordInput').value;
+    if (input === "Sushi'space") {
+      document.getElementById('passwordScreen').style.display = 'none';
+      document.querySelector('header').style.display = 'block';
+      document.querySelector('.container').style.display = 'block';
+      document.querySelector('.intro').style.display = 'block';
+      document.querySelector('.upload-section').style.display = 'block';
+    } else {
+      alert("Incorrect password. Try again, Sushi.");
+    }
+  }
+
+  const levels = [
+    "Never seeing daylight",
+    "Private slay",
+    "Maybe if I edited it",
+    "Lowkey fire",
+    "Yup, I'd post this"
+  ];
+
+  let entryCount = 0;
+
+  function addEntry() {
+    if (entryCount >= 30) {
+      alert("You've reached your 30-day journal limit 🌿✨");
+      return;
     }
 
-    const levels = [
-      "Never seeing daylight",
-      "Private slay",
-      "Maybe if I edited it",
-      "Lowkey fire",
-      "Yup, I'd post this"
-    ];
+    const fileInput = document.getElementById('videoFile');
+    const notes = document.getElementById('videoNotes').value;
+    const slider = document.getElementById('postSlider').value;
 
-    let entryCount = 0;
+    if (!fileInput.files[0]) return alert("Please upload a video.");
 
-    function addEntry() {
-      if (entryCount >= 30) {
-        alert("You've reached your 30-day journal limit 🌿✨");
-        return;
-      }
+    const videoURL = URL.createObjectURL(fileInput.files[0]);
+    const container = document.getElementById('entriesContainer');
 
-      const fileInput = document.getElementById('videoFile');
-      const notes = document.getElementById('videoNotes').value;
-      const slider = document.getElementById('postSlider').value;
-
-      if (!fileInput.files[0]) return alert("Please upload a video.");
-
-      const videoURL = URL.createObjectURL(fileInput.files[0]);
-      const container = document.getElementById('entriesContainer');
-
-      const div = document.createElement('div');
-      div.className = 'video-entry';
-      div.innerHTML = `
-        <h3>Day ${++entryCount}</h3>
-        <video controls src="${videoURL}"></video>
-        <div class="entry-reflection">${notes}</div>
-        <div class="slider-container">
-          <label>Would I Post This?</label>
-          <div style="margin-top: 4px; font-style: italic; color: #4e654e;">
-            ${levels[slider / 25]}
-          </div>
+    const div = document.createElement('div');
+    div.className = 'video-entry';
+    div.innerHTML = `
+      <h3>Day ${++entryCount}</h3>
+      <video controls src="${videoURL}"></video>
+      <div class="entry-reflection">${notes}</div>
+      <div class="slider-container">
+        <label>Would I Post This?</label>
+        <div style="margin-top: 4px; font-style: italic; color: #4e654e;">
+          ${levels[slider / 25]}
         </div>
-      `;
-      container.prepend(div);
-      fileInput.value = "";
-      document.getElementById('videoNotes').value = "";
-      document.getElementById('postSlider').value = 0;
-    }
-  </script>
-</body>
+      </div>
+    `;
+    container.prepend(div);
+    fileInput.value = "";
+    document.getElementById('videoNotes').value = "";
+    document.getElementById('postSlider').value = 0;
+  }
+</script>
 </html>
+
