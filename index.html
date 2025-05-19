@@ -212,6 +212,30 @@
   let entryCount = 0;
 
   function addEntry() {
+    const fileInput = document.getElementById('videoFile');
+    const notes = document.getElementById('videoNotes').value;
+    const slider = document.getElementById('postSlider').value;
+
+    if (!fileInput.files[0]) return alert("Please upload a video.");
+
+    const videoURL = URL.createObjectURL(fileInput.files[0]);
+    const preview = document.createElement('video');
+    preview.src = videoURL;
+    preview.controls = true;
+    preview.style.width = '100%';
+    preview.style.marginTop = '1rem';
+    preview.style.borderRadius = '10px';
+
+    const existingPreview = document.getElementById('video-preview');
+    if (existingPreview) existingPreview.remove();
+
+    preview.id = 'video-preview';
+    document.getElementById('uploadSection').appendChild(preview);
+
+    if (entryCount >= 30) {
+      alert("You've reached your 30-day journal limit 🌿✨");
+      return;
+    }
     if (entryCount >= 30) {
       alert("You've reached your 30-day journal limit 🌿✨");
       return;
@@ -258,6 +282,7 @@
   }
 </script>
 </html>
+
 
 
 
