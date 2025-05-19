@@ -4,8 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Softly Sushi</title>
-  <link rel="icon" href="https://i.imgur.com/tkCgphx.png" />
-  <link rel="apple-touch-icon" href="https://i.imgur.com/tkCgphx.png" />
+  <link rel="icon" href="https://raw.githubusercontent.com/google/material-design-icons/master/symbols/web/restaurant_menu/materialsymbolsrounded/restaurant_menu_black_48dp.png" />
+  <link rel="apple-touch-icon" href="https://raw.githubusercontent.com/google/material-design-icons/master/symbols/web/restaurant_menu/materialsymbolsrounded/restaurant_menu_black_48dp.png" />
   <meta name="apple-mobile-web-app-title" content="Softly Sushi">
   <meta name="theme-color" content="#f1f6f2">
   <style>
@@ -240,11 +240,24 @@
       </div>
     `;
     container.prepend(div);
+
+    const deleteBtn = document.createElement('button');
+    deleteBtn.textContent = 'Delete';
+    deleteBtn.style.marginTop = '1rem';
+    deleteBtn.style.padding = '0.4rem 1rem';
+    deleteBtn.style.backgroundColor = '#d96262';
+    deleteBtn.style.color = '#fff';
+    deleteBtn.style.border = 'none';
+    deleteBtn.style.borderRadius = '5px';
+    deleteBtn.style.cursor = 'pointer';
+    deleteBtn.onclick = () => div.remove();
+    div.appendChild(deleteBtn);
     fileInput.value = "";
     document.getElementById('videoNotes').value = "";
     document.getElementById('postSlider').value = 0;
   }
 </script>
 </html>
+
 
 
