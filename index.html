@@ -232,6 +232,7 @@
     if (existingPreview) existingPreview.remove();
 
     preview.id = 'video-preview';
+    preview.className = 'preview-temp';
     document.getElementById('uploadSection').appendChild(preview);
 
     if (entryCount >= 30) {
@@ -254,6 +255,8 @@
         </div>
       </div>
     `;
+    const previewTemp = document.querySelector('.preview-temp');
+    if (previewTemp) previewTemp.remove();
     container.prepend(div);
 
     const deleteBtn = document.createElement('button');
